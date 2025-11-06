@@ -1,0 +1,22 @@
+{
+  "name": "Manifestation App",
+  "short_name": "Manifest",
+  "description": "Your personal manifestation and affirmation app",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff8f0",
+  "theme_color": "#ffe4e6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
