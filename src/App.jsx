@@ -27,7 +27,6 @@ const App = () => {
     { text: "If you do not feel natural about what you want to be, you will not be it.", author: "Neville Goddard" },
     { text: "Your assumption, to be effective, cannot be a single isolated act; it must be a maintained attitude of the wish fulfilled.", author: "Neville Goddard" },
     { text: "Do not waste time in regret, for to think feelingly of the mistakes of the past is to re-infect yourself.", author: "Neville Goddard" },
-    { text: "The meaning of life is just to be alive. It is so plain and so obvious and so simple. And yet, everybody rushes around in a great panic as if it were necessary to achieve something beyond themselves.", author: "Alan Watts" },
     { text: "This is the real secret of life to be completely engaged with what you are doing in the here and now. And instead of calling it work, realize it is play.", author: "Alan Watts" },
     { text: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts" },
     { text: "You are a function of what the whole universe is doing in the same way that a wave is a function of what the whole ocean is doing.", author: "Alan Watts" },
