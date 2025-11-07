@@ -75,7 +75,7 @@ const App = () => {
       description: "You already are what you wish to be. Only your doubt makes you believe that you are not yet. It consists of two parts: a short meditation and a thought exercise for everyday life.",
       steps: [
         "🧘‍♀️ Part 1 - Meditation 'I Am': Take about 10 minutes morning and evening. Sit comfortably, close your eyes and repeat slowly and consciously: 'I am... I am... I am...' Stay completely with this feeling of I am. At the end of your meditation, briefly recall your new story from Method 1 and imagine it in bright colors. That's all - and yet very powerful.",
-        "💭 Part 2 - Thought Exercise 'Being in the Now': In conscious manifestation, it's about being present. Therefore accompany everything you do with silent mindfulness: I'm driving. I'm eating pasta. I'm brushing my teeth. Simply name quietly what you're doing right now. If you drift off - no problem. Just start again without judging yourself.",
+        "💭 Part 2 - Thought Exercise 'Being in the Now': In conscious manifestation, it's about being present. Therefore accompany everything you do with silent mindfulness for example: I'm driving. I'm eating. I'm brushing my teeth. Simply name quietly what you're doing right now. If you drift off - no problem. Just start again without judging yourself.",
         "✨ This exercise brings you back to the now, where your true power lies: I am that I am."
       ]
     },
