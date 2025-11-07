@@ -45,10 +45,10 @@ const App = () => {
       title: "Old Story – New Story",
       emoji: "🔥",
       icon: Flame,
-      subtitle: "This method helps you let go of old, burdensome stories and create a new reality.",
+      subtitle: "This method helps you let go of old, painful stories and create a new reality.",
       description: "Often we carry experiences, thoughts or patterns within us that still influence us today - even though they are long gone. With this exercise you free yourself from them and rewrite your story - the way you really want to live it.",
       steps: [
-        "🕯️ Write down the old story: Take a situation that stresses or saddens you. Write everything down - as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
+        "🕯️ Write down the old story: Take a situation that stresses or hurts you. Write everything down - as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
         "🔥 Let go: When you're done, take the papers with your old story and burn them outside under safe conditions. Watch them dissolve in flames. Breathe deeply in and out - and feel that this version of your story no longer defines you.",
         "🌷 Write the new story: Now rewrite your story - the way you would have liked to experience it. Be generous, creative and loving with yourself. Make yourself the main character where everything goes the way you dreamed.",
         "✨ Live your new truth: Stay consciously in this new story for the next three days. When the old one resurfaces, say out loud: 'Stop! This is no longer my truth.' Then realign yourself inwardly - and remember: You decide which story is true."
