@@ -45,13 +45,13 @@ const App = () => {
       title: "Old Story – New Story",
       emoji: "🔥",
       icon: Flame,
-      subtitle: "Free yourself from old stories and create a new reality.",
+      subtitle: "This method helps you let go of old, burdensome stories and create a new reality.",
+      description: "Often we carry experiences, thoughts or patterns within us that still influence us today - even though they are long gone. With this exercise you free yourself from them and rewrite your story - the way you really want to live it.",
       steps: [
-        "Write the stressful or hurtful situation in detail",
-        "Burn the papers safely outdoors",
-        "Rewrite the story as you wish it to be",
-        "Stay in the new story for three days",
-        "When old thoughts appear say: Stop! This is no longer my truth. This is not me!"
+        "🕯️ Write down the old story: Take a situation that stresses or saddens you. Write everything down - as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
+        "🔥 Let go: When you're done, take the papers with your old story and burn them outside under safe conditions. Watch them dissolve in flames. Breathe deeply in and out - and feel that this version of your story no longer defines you.",
+        "🌷 Write the new story: Now rewrite your story - the way you would have liked to experience it. Be generous, creative and loving with yourself. Make yourself the main character where everything goes the way you dreamed.",
+        "✨ Live your new truth: Stay consciously in this new story for the next three days. When the old one resurfaces, say out loud: 'Stop! This is no longer my truth.' Then realign yourself inwardly - and remember: You decide which story is true."
       ]
     },
     {
@@ -59,11 +59,12 @@ const App = () => {
       title: "Feel the Feeling",
       emoji: "🌷",
       icon: Flower2,
-      subtitle: "Feel the true emotion behind your desire and become the person who lives your manifestation.",
+      subtitle: "This method helps you understand your desires on a deeper level.",
+      description: "Often we believe we want certain things - more money, a relationship, health - but in truth we long for a specific feeling that we associate with these things.",
       steps: [
-        "Identify the feeling you want to experience",
-        "Embody your new version fully",
-        "Notice moments when this feeling already appears in your life"
+        "💫 Recognize the true goal behind your wish: Take time to honestly explore which feeling you are actually seeking through your wish. Do you want security or freedom through money? Do you want comfort or appreciation through love? Do you want recognition or inner fulfillment through success? Recognize that it's never just about external things - but always about the feeling behind it.",
+        "🌷 Embody your new version: Now invite yourself to be a little more today the person you would be if your wish were already fulfilled. This doesn't mean you 'pretend' - but that you feel into this new version of yourself. How would you behave, think, speak, act if you had already achieved your goal? How would you drink your morning coffee if you were already rich, healthy or loved?",
+        "🌞 Recognize what's already there: Look at your current life: Where do you already experience this feeling in small moments? Maybe you feel security when you're in your home. Maybe love when you laugh with friends. When you consciously perceive and connect these feelings, you are already in the vibration of your wish."
       ]
     },
     {
@@ -71,11 +72,12 @@ const App = () => {
       title: "I Am That I Am",
       emoji: "🌿",
       icon: Leaf,
-      subtitle: "Focus on meditation and simple thought exercises to recognize and dissolve doubt.",
+      subtitle: "This method helps you turn your focus away from doubt and negative thoughts - towards your true being.",
+      description: "You already are what you wish to be. Only your doubt makes you believe that you are not yet. It consists of two parts: a short meditation and a thought exercise for everyday life.",
       steps: [
-        "10 minutes meditation morning and evening",
-        "Repeat I am while visualizing your new story",
-        "Thought exercise: mentally name simple actions throughout the day"
+        "🧘‍♀️ Part 1 - Meditation 'I Am': Take about 10 minutes morning and evening. Sit comfortably, close your eyes and repeat slowly and consciously: 'I am... I am... I am...' Stay completely with this feeling of I am. At the end of your meditation, briefly recall your new story from Method 1 and imagine it in bright colors. That's all - and yet very powerful.",
+        "💭 Part 2 - Thought Exercise 'Being in the Now': In conscious manifestation, it's about being present. Therefore accompany everything you do with silent mindfulness: I'm driving. I'm eating pasta. I'm brushing my teeth. Simply name quietly what you're doing right now. If you drift off - no problem. Just start again without judging yourself.",
+        "✨ This exercise brings you back to the now, where your true power lies: I am that I am."
       ]
     },
     {
@@ -83,12 +85,13 @@ const App = () => {
       title: "Talk to Me – Subconscious",
       emoji: "🗣️",
       icon: MessageCircle,
-      subtitle: "Ask your subconscious clear questions and listen for gentle, supportive answers.",
+      subtitle: "This method invites you to communicate directly with your subconscious.",
+      description: "Instead of using old theories or 'reprogramming', you go a direct, mindful way: ask a question, listen and receive the inner answer.",
       steps: [
-        "Formulate a question as a gratitude sentence",
-        "Wait and listen for a word, feeling, or hint",
-        "Thank the insight and act when ready",
-        "Best in a calm time window or after meditation"
+        "💭 Formulate question: Think of a concrete question you want an answer to. Examples: 'What blocks my manifestation?' 'What resistances should I resolve so my wish becomes reality?' Formulate the question as a gratitude sentence, as if you had already received the answer: 'Dear subconscious, thank you for your help with the question of what blocks my manifestation. Thanks to you, I now know what to do.'",
+        "🧘‍♀️ Listen patiently: Wait for a quiet, inner answer. The answer can be a word, a sentence, a feeling or a hint. Important: It feels friendly, supportive and light - unlike negative everyday thoughts. Thank inwardly for every answer.",
+        "🌞 Create right conditions: Choose a quiet time window without stress. Meditation beforehand can help you hear more clearly. Practice patience - answers often come within 48 hours.",
+        "✨ With this method you develop a mindful, trusting connection to your inner knowledge. Your subconscious always has helpful hints for you - you just need to learn to hear them."
       ]
     },
     {
@@ -96,11 +99,13 @@ const App = () => {
       title: "Thought Awareness",
       emoji: "💡",
       icon: Lightbulb,
-      subtitle: "Notice when you think about what you do not want and deliberately shift to the desired image.",
+      subtitle: "This method helps you consciously recognize which thoughts you think.",
+      description: "Especially those that distract you from your manifestation. Often we are more occupied with what we don't want, instead of what we wish for. This is where Thought Awareness comes in: Recognize your thoughts and realign them.",
       steps: [
-        "Become aware of negative or contrast thoughts",
-        "Bring up your desired scene and brighten it",
-        "Use small physical cues (e.g., tap your arm twice) to anchor the shift"
+        "🧠 Perceive thoughts: Whenever you notice a thought about your current situation - especially about what you no longer want - make it conscious: 'Hey, I notice that I'm only dealing with what is and what I don't want.' Ask yourself: Are you seeing the reality in front of you or your desired situation? Don't judge, just pause briefly and consciously call your manifestation into your mental image.",
+        "🌞 Intensify visualization: Imagine how the light in your mental image gets brighter, like with a dimmable lamp - illuminate the scene of your desired reality. Visualize how your best friend sincerely congratulates you and is genuinely happy for you.",
+        "✨ Small reminders in everyday life: You can build in a small physical reminder, e.g. tap your arm twice with your finger to remind you of your manifestation. The more often you do this process, the more conscious you become of your thoughts and the easier it is to align them with what you really want.",
+        "💭 With this method you learn to actively guide your thoughts, let go of the negative and consciously nourish your manifestation."
       ]
     },
     {
@@ -108,11 +113,13 @@ const App = () => {
       title: "Robotic Affirmations",
       emoji: "🤖",
       icon: Bot,
-      subtitle: "Repeating your own affirmations in a focused loop to calm resistant ego patterns.",
+      subtitle: "Robotic Affirmations means consciously reciting affirmations over a longer period or in large numbers.",
+      description: "The method is controversial: some swear by it, others consider it ineffective. Applied correctly, however, it can be very powerful, especially at the beginning of your manifestation practice.",
       steps: [
-        "Choose a user-created affirmation",
-        "Repeat regularly (by time or count)",
-        "Observe increased calm and reduced reactivity"
+        "⚡ Bypass the ego: At the beginning you often encounter resistance from your ego - that inner system that wants to keep you in the old. It sends negative thoughts, doubts and fear to distract you. It's common to react to these thoughts - but that's exactly what keeps you trapped in old patterns. Robotic Affirmations help break this cycle.",
+        "🔄 Continuous loop of affirmation: Choose an affirmation that supports your manifestation and strengthens you. Repeat it for a certain time or number (e.g. morning, evening, during meditation). Goal: To saturate your mind so that the ego temporarily stays quiet and you feel inner stability.",
+        "🌿 Feel the effect: Over time you recognize how inner peace and balance feel. You react less to negative thoughts and gain freedom to consciously live your manifestations. Important: This is not a 'magic trick' - it's a practice that requires patience and regularity.",
+        "✨ Robotic Affirmations are a tool to calm your ego, align your mind and stabilize the vibration of your wishes."
       ]
     }
   ];
