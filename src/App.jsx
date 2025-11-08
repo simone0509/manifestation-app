@@ -900,6 +900,7 @@ const App = () => {
       <Header />
       {menuOpen && <NavigationMenu />}
       {showSupportMessage && <SupportMessage />}
+      {showTimerAlert && <TimerAlert />}
       
       <main className="min-h-screen">
         {currentPage === 'home' && <HomePage />}
