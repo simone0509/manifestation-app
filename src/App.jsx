@@ -193,11 +193,13 @@ const App = () => {
     const savedAffirmations = localStorage.getItem('affirmations');
     const savedJournal = localStorage.getItem('journalEntries');
     const savedCounter = localStorage.getItem('counter');
+    const savedReminders = localStorage.getItem('reminders');
     const firstVisit = localStorage.getItem('firstVisit');
     
     if (savedAffirmations) setAffirmations(JSON.parse(savedAffirmations));
     if (savedJournal) setJournalEntries(JSON.parse(savedJournal));
     if (savedCounter) setCounter(parseInt(savedCounter));
+    if (savedReminders) setReminders(JSON.parse(savedReminders));
     
     if (!firstVisit) {
       localStorage.setItem('firstVisit', new Date().toISOString());
