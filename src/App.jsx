@@ -1,4 +1,69 @@
-import React, { useState, useEffect } from 'react';
+useEffect(() => {
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+  }, [reminders]);
+
+  useEffect(() => {
+    let interval;
+    if (countdownRunning && countdownTime > 0) {
+      interval = setInterval(() => {
+        setCountdownTime(prev => {
+          if (prev <= 1) {
+            setCountdownRunning(false);
+            playTimerSound();
+            setTimerMessage('Time is up! ✨');
+            setShowTimerAlert(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [countdownRunning, countdownTime]);
+
+  useEffect(() => {
+    const checkDailyReminders = () => {
+      const now = new Date();
+      const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      
+      reminders.forEach(reminder => {
+        if (reminder.type === 'daily' && reminder.time === currentTime && !reminder.triggered) {
+          playTimerSound();
+          setTimerMessage(reminder.message || 'Daily reminder! 🌸');
+          setShowTimerAlert(true);
+          reminder.triggered = true;
+          setTimeout(() => { reminder.triggered = false; }, 60000);
+        }
+      });
+    };
+
+    const dailyInterval = setInterval(checkDailyReminders, 30000);
+    return () => clearInterval(dailyInterval);
+  }, [reminders]);
+
+  useEffect(() => {
+    reminders.forEach(reminder => {
+      if (reminder.type === 'interval' && !reminder.intervalId) {
+        const intervalMs = reminder.hours * 60 * 60 * 1000;
+        reminder.intervalId = setInterval(() => {
+          playTimerSound();
+          setTimerMessage(reminder.message || 'Interval reminder! ⏰');
+          setShowTimerAlert(true);
+        }, intervalMs);
+      }
+    });
+
+    return () => {
+      reminders.forEach(reminder => {
+        if (reminder.intervalId) {
+          clearInterval(reminder.intervalId);
+        }
+      });
+    };
+  }, [reminders]);
+
+  const playTimerSound = () => {
+    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSyAzvLZiTYIG2m98OScTgwOUKvo8bllHQU2jdXzzn0vBSh+zPLaizsKGGS98+mnVRULTKXh8bllHwU0iNHz0IU6Cht0wPLjpFMUDU6q6PKyZB0FN4/X88t+MAUpfMvy3Y4+ChxqvvTlqlcWC1Cn4PG2YhwEN47V88t+MAUofs3y3YtACBpnvvPknUwMDU6o6PKxYhsENYvU8smALwUmeMvz34xACBxnvvTlplUUC06o6PGxYxsENIjS88mCLwUoecvz34xACBxovvPjpFMTC0uj4PCyYhsEMobR88qDMAUqfMvz4IxABxtmvPLhpFQTDE+l4e+yYRsEM4fS88qDMAUres3z4Y5AChtnvPPlpVQTC06l4O+xYRsEMYXQ88qDLwUpes3z4Y5AChxnvPPkpVQTCk2k3++yYBoDMYTP88qCLwUpes3z4Y5AChxnvPPjpVMSCkyk3++yYBoDMYTO88qBLgQofM3z4o9BCxxovPPjpVMSCkuj3u+xXxoDL4TN88qBLgQpfM3z4o9BCBxovPPiplUTC0yk3u+xXxkDL4TN88qBLgQpfM3z4o9BCBxovPPiplUTC0yk3u+xXxkDLoXN88qBLgQpfM3z4o9BCBxnu/PjplUTCkyk3u+xXxkDL4XN88p/LQQofM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3u+xXxkDL4TM88p/LQQpfM3z4pBBCBxnu/PjplUTCkyk3import React, { useState, useEffect } from 'react';
 import { Heart, BookOpen, Edit3, Clock, Hash, Menu, X, Coffee, Flame, Flower2, Leaf, MessageCircle, Lightbulb, Bot, ChevronRight, Plus, Trash2, Save, RotateCcw } from 'lucide-react';
 
 const App = () => {
@@ -518,20 +583,245 @@ const App = () => {
     </div>
   );
 
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
+
+  const startCountdown = () => {
+    setCountdownTime(countdownMinutes * 60);
+    setCountdownRunning(true);
+  };
+
+  const addReminder = (type) => {
+    const newReminder = {
+      id: Date.now(),
+      type,
+      time: type === 'daily' ? dailyTime : null,
+      hours: type === 'interval' ? intervalHours : null,
+      message: timerMessage || (affirmations.length > 0 ? affirmations[Math.floor(Math.random() * affirmations.length)].text : 'Time for your practice! 🌸')
+    };
+    setReminders([...reminders, newReminder]);
+    setShowReminderForm(false);
+    setTimerMessage('');
+  };
+
+  const deleteReminder = (id) => {
+    const reminder = reminders.find(r => r.id === id);
+    if (reminder && reminder.intervalId) {
+      clearInterval(reminder.intervalId);
+    }
+    setReminders(reminders.filter(r => r.id !== id));
+  };
+
   const TimerPage = () => (
     <div className="max-w-3xl mx-auto p-6 pb-24">
       <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Timer & Reminders</h2>
       
-      <div className="bg-amber-50 rounded-2xl p-6 mb-6 border border-amber-200">
-        <p className="text-amber-800 text-sm">
-          💡 Note: Browser notifications require permission. This feature allows you to set custom reminders for affirmations, methods, or inspirational quotes.
-        </p>
-      </div>
+      <div className="space-y-6">
+        <div className="flex space-x-4 mb-6">
+          <button
+            onClick={() => setTimerType('countdown')}
+            className={`flex-1 p-3 rounded-xl transition ${timerType === 'countdown' ? 'bg-rose-500 text-white' : 'bg-white text-gray-700 border border-rose-200'}`}
+          >
+            Countdown
+          </button>
+          <button
+            onClick={() => setTimerType('daily')}
+            className={`flex-1 p-3 rounded-xl transition ${timerType === 'daily' ? 'bg-rose-500 text-white' : 'bg-white text-gray-700 border border-rose-200'}`}
+          >
+            Daily
+          </button>
+          <button
+            onClick={() => setTimerType('interval')}
+            className={`flex-1 p-3 rounded-xl transition ${timerType === 'interval' ? 'bg-rose-500 text-white' : 'bg-white text-gray-700 border border-rose-200'}`}
+          >
+            Interval
+          </button>
+        </div>
 
-      <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100 text-center">
-        <Clock size={64} className="mx-auto mb-4 text-rose-300" />
-        <h3 className="text-xl font-light text-rose-900 mb-2">Coming Soon</h3>
-        <p className="text-gray-600">Set hourly, daily, or custom reminders to keep you aligned with your manifestation practice.</p>
+        {timerType === 'countdown' && (
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
+            <h3 className="text-xl font-light text-rose-900 mb-4 text-center">Countdown Timer</h3>
+            <p className="text-gray-600 text-center mb-6">Set a timer for meditation or practice</p>
+            
+            {!countdownRunning ? (
+              <div className="space-y-6">
+                <div className="flex items-center justify-center space-x-4">
+                  <button
+                    onClick={() => setCountdownMinutes(Math.max(1, countdownMinutes - 1))}
+                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
+                  >
+                    -
+                  </button>
+                  <div className="text-5xl font-light text-rose-600 w-32 text-center">
+                    {countdownMinutes}
+                  </div>
+                  <button
+                    onClick={() => setCountdownMinutes(countdownMinutes + 1)}
+                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
+                  >
+                    +
+                  </button>
+                </div>
+                <p className="text-center text-gray-500">minutes</p>
+                <button
+                  onClick={startCountdown}
+                  className="w-full bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
+                >
+                  Start Timer
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <div className="text-7xl font-light text-rose-600 text-center">
+                  {formatTime(countdownTime)}
+                </div>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => setCountdownRunning(false)}
+                    className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-xl hover:bg-gray-300 transition"
+                  >
+                    Pause
+                  </button>
+                  <button
+                    onClick={() => { setCountdownRunning(false); setCountdownTime(0); }}
+                    className="flex-1 bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
+                  >
+                    Stop
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {timerType === 'daily' && (
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
+            <h3 className="text-xl font-light text-rose-900 mb-4 text-center">Daily Reminder</h3>
+            <p className="text-gray-600 text-center mb-6">Set a daily reminder at a specific time</p>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-2">Time</label>
+                <input
+                  type="time"
+                  value={dailyTime}
+                  onChange={(e) => setDailyTime(e.target.value)}
+                  className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-gray-600 mb-2">Message (optional)</label>
+                <input
+                  type="text"
+                  value={timerMessage}
+                  onChange={(e) => setTimerMessage(e.target.value)}
+                  placeholder="Time for your affirmations..."
+                  className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
+                />
+              </div>
+              <button
+                onClick={() => addReminder('daily')}
+                className="w-full bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
+              >
+                Add Daily Reminder
+              </button>
+            </div>
+          </div>
+        )}
+
+        {timerType === 'interval' && (
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
+            <h3 className="text-xl font-light text-rose-900 mb-4 text-center">Interval Reminder</h3>
+            <p className="text-gray-600 text-center mb-6">Get reminded every few hours</p>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-600 mb-2">Every X hours</label>
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={() => setIntervalHours(Math.max(1, intervalHours - 1))}
+                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
+                  >
+                    -
+                  </button>
+                  <div className="text-4xl font-light text-rose-600 w-20 text-center">
+                    {intervalHours}
+                  </div>
+                  <button
+                    onClick={() => setIntervalHours(intervalHours + 1)}
+                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm text-gray-600 mb-2">Message (optional)</label>
+                <input
+                  type="text"
+                  value={timerMessage}
+                  onChange={(e) => setTimerMessage(e.target.value)}
+                  placeholder="Check in with your manifestation..."
+                  className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
+                />
+              </div>
+              <button
+                onClick={() => addReminder('interval')}
+                className="w-full bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
+              >
+                Add Interval Reminder
+              </button>
+            </div>
+          </div>
+        )}
+
+        {reminders.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-xl font-light text-rose-900 mb-4">Active Reminders</h3>
+            <div className="space-y-3">
+              {reminders.map(reminder => (
+                <div key={reminder.id} className="bg-white rounded-xl p-4 shadow-md border border-rose-100 flex justify-between items-center">
+                  <div>
+                    <p className="text-gray-800 font-light">
+                      {reminder.type === 'daily' && `Daily at ${reminder.time}`}
+                      {reminder.type === 'interval' && `Every ${reminder.hours} hour${reminder.hours > 1 ? 's' : ''}`}
+                    </p>
+                    {reminder.message && (
+                      <p className="text-sm text-gray-500 mt-1">{reminder.message}</p>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => deleteReminder(reminder.id)}
+                    className="text-rose-600 hover:text-rose-800"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const TimerAlert = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowTimerAlert(false)}>
+      <div className="bg-white rounded-3xl p-8 max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div className="text-center space-y-4">
+          <Clock size={64} className="mx-auto text-rose-500" />
+          <h3 className="text-2xl font-light text-rose-900">Timer Alert</h3>
+          <p className="text-gray-700 text-lg">{timerMessage}</p>
+          <button
+            onClick={() => setShowTimerAlert(false)}
+            className="bg-rose-500 text-white px-8 py-3 rounded-xl hover:bg-rose-600 transition"
+          >
+            Got it! ✨
+          </button>
+        </div>
       </div>
     </div>
   );
