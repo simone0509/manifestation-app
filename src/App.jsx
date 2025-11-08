@@ -27,6 +27,7 @@ const App = () => {
     { text: "If you do not feel natural about what you want to be, you will not be it.", author: "Neville Goddard" },
     { text: "Your assumption, to be effective, cannot be a single isolated act; it must be a maintained attitude of the wish fulfilled.", author: "Neville Goddard" },
     { text: "Do not waste time in regret, for to think feelingly of the mistakes of the past is to re-infect yourself.", author: "Neville Goddard" },
+    { text: "The meaning of life is just to be alive. It is so plain and so obvious and so simple. And yet, everybody rushes around in a great panic as if it were necessary to achieve something beyond themselves.", author: "Alan Watts" },
     { text: "This is the real secret of life to be completely engaged with what you are doing in the here and now. And instead of calling it work, realize it is play.", author: "Alan Watts" },
     { text: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts" },
     { text: "You are a function of what the whole universe is doing in the same way that a wave is a function of what the whole ocean is doing.", author: "Alan Watts" },
@@ -44,10 +45,10 @@ const App = () => {
       title: "Old Story – New Story",
       emoji: "🔥",
       icon: Flame,
-      subtitle: "This method helps you let go of old, painful stories and create a new reality.",
+      subtitle: "This method helps you let go of old, burdensome stories and create a new reality.",
       description: "Often we carry experiences, thoughts or patterns within us that still influence us today - even though they are long gone. With this exercise you free yourself from them and rewrite your story - the way you really want to live it.",
       steps: [
-        "🕯️ Write down the old story: Take a situation that stresses or hurts you. Write everything down - as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
+        "🕯️ Write down the old story: Take a situation that stresses or saddens you. Write everything down - as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
         "🔥 Let go: When you're done, take the papers with your old story and burn them outside under safe conditions. Watch them dissolve in flames. Breathe deeply in and out - and feel that this version of your story no longer defines you.",
         "🌷 Write the new story: Now rewrite your story - the way you would have liked to experience it. Be generous, creative and loving with yourself. Make yourself the main character where everything goes the way you dreamed.",
         "✨ Live your new truth: Stay consciously in this new story for the next three days. When the old one resurfaces, say out loud: 'Stop! This is no longer my truth.' Then realign yourself inwardly - and remember: You decide which story is true."
@@ -75,7 +76,7 @@ const App = () => {
       description: "You already are what you wish to be. Only your doubt makes you believe that you are not yet. It consists of two parts: a short meditation and a thought exercise for everyday life.",
       steps: [
         "🧘‍♀️ Part 1 - Meditation 'I Am': Take about 10 minutes morning and evening. Sit comfortably, close your eyes and repeat slowly and consciously: 'I am... I am... I am...' Stay completely with this feeling of I am. At the end of your meditation, briefly recall your new story from Method 1 and imagine it in bright colors. That's all - and yet very powerful.",
-        "💭 Part 2 - Thought Exercise 'Being in the Now': In conscious manifestation, it's about being present. Therefore accompany everything you do with silent mindfulness for example: I'm driving. I'm eating. I'm brushing my teeth. Simply name quietly what you're doing right now. If you drift off - no problem. Just start again without judging yourself.",
+        "💭 Part 2 - Thought Exercise 'Being in the Now': In conscious manifestation, it's about being present. Therefore accompany everything you do with silent mindfulness: I'm driving. I'm eating pasta. I'm brushing my teeth. Simply name quietly what you're doing right now. If you drift off - no problem. Just start again without judging yourself.",
         "✨ This exercise brings you back to the now, where your true power lies: I am that I am."
       ]
     },
@@ -345,15 +346,18 @@ const App = () => {
           <span className="text-5xl">{selectedMethod.emoji}</span>
           <h2 className="text-3xl font-light text-rose-900">{selectedMethod.title}</h2>
         </div>
-        <p className="text-gray-700 text-lg mb-6">{selectedMethod.subtitle}</p>
-        <div className="space-y-4">
+        <p className="text-gray-700 text-lg mb-4 font-light italic">{selectedMethod.subtitle}</p>
+        {selectedMethod.description && (
+          <p className="text-gray-600 mb-6 leading-relaxed">{selectedMethod.description}</p>
+        )}
+        <div className="space-y-6">
           <h3 className="text-xl font-light text-rose-800 mb-4">Steps:</h3>
           {selectedMethod.steps.map((step, index) => (
             <div key={index} className="flex space-x-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center text-rose-900 font-light">
+              <div className="flex-shrink-0 w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center text-rose-900 font-light text-sm">
                 {index + 1}
               </div>
-              <p className="text-gray-700 pt-1">{step}</p>
+              <p className="text-gray-700 pt-1 leading-relaxed">{step}</p>
             </div>
           ))}
         </div>
@@ -537,25 +541,25 @@ const App = () => {
       <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Counter</h2>
       
       <div className="bg-white rounded-2xl p-12 shadow-lg border border-rose-100 text-center">
-        <p className="text-gray-600 mb-6">Track your affirmation repetitions, meditation days, or any habit you want to count.</p>
+        <p className="text-gray-600 mb-8">Track your affirmation repetitions, meditation days, or any habit you want to count.</p>
         
-        <div className="text-8xl font-light text-rose-600 mb-8">
+        <div className="text-8xl font-light text-rose-600 mb-12">
           {counter}
         </div>
         
-        <div className="flex justify-center space-x-4">
+        <div className="flex flex-col items-center space-y-6">
           <button
             onClick={() => setCounter(counter + 1)}
-            className="bg-rose-500 text-white px-8 py-4 rounded-xl hover:bg-rose-600 transition text-xl flex items-center space-x-2 active:scale-95"
+            className="w-32 h-32 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition shadow-xl flex items-center justify-center active:scale-95"
           >
-            <Plus size={28} />
-            <span>Add</span>
+            <Plus size={48} strokeWidth={2} />
           </button>
+          
           <button
             onClick={() => setCounter(0)}
-            className="bg-gray-200 text-gray-700 px-8 py-4 rounded-xl hover:bg-gray-300 transition text-xl flex items-center space-x-2 active:scale-95"
+            className="bg-gray-200 text-gray-600 px-6 py-2 rounded-lg hover:bg-gray-300 transition text-sm flex items-center space-x-2 active:scale-95"
           >
-            <RotateCcw size={28} />
+            <RotateCcw size={16} />
             <span>Reset</span>
           </button>
         </div>
