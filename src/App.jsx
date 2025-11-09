@@ -1,76 +1,5 @@
-useEffect(() => {
-    localStorage.setItem('reminders', JSON.stringify(reminders));
-  }, [reminders]);
-
-  useEffect(() => {
-    let interval;
-    if (countdownRunning && countdownTime > 0) {
-      interval = setInterval(() => {
-        setCountdownTime(prev => {
-          if (prev <= 1) {
-            setCountdownRunning(false);
-            playTimerSound();
-            setTimerMessage('Time is up! ✨');
-            setShowTimerAlert(true);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [countdownRunning, countdownTime]);
-
-  useEffect(() => {
-    const checkDailyReminders = () => {
-      const now = new Date();
-      const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-      
-      reminders.forEach(reminder => {
-        if (reminder.type === 'daily' && reminder.time === currentTime && !reminder.triggered) {
-          playTimerSound();
-          setTimerMessage(reminder.message || 'Daily reminder! 🌸');
-          setShowTimerAlert(true);
-          reminder.triggered = true;
-          setTimeout(() => { reminder.triggered = false; }, 60000);
-        }
-      });
-    };
-
-    const dailyInterval = setInterval(checkDailyReminders, 30000);
-    return () => clearInterval(dailyInterval);
-  }, [reminders]);
-
-  useEffect(() => {
-    reminders.forEach(reminder => {
-      if (reminder.type === 'interval' && !reminder.intervalId) {
-        const intervalMs = reminder.hours * 60 * 60 * 1000;
-        reminder.intervalId = setInterval(() => {
-          playTimerSound();
-          setTimerMessage(reminder.message || 'Interval reminder! ⏰');
-          setShowTimerAlert(true);
-        }, intervalMs);
-      }
-    });
-
-    return () => {
-      reminders.forEach(reminder => {
-        if (reminder.intervalId) {
-          clearInterval(reminder.intervalId);
-        }
-      });
-    };
-  }, [reminders]);
-
-const playTimerSound = () => {
-  try {
-    const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-    audio.play().catch(e => console.log('Audio play failed'));
-  } catch (e) {
-    console.log('Audio not supported');
-  }
-};
-      import { Heart, BookOpen, Edit3, Clock, Hash, Menu, X, Coffee, Flame, Flower2, Leaf, MessageCircle, Lightbulb, Bot, ChevronRight, Plus, Trash2, Save, RotateCcw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Heart, BookOpen, Edit3, Clock, Hash, Menu, X, Coffee, Flame, Flower2, Leaf, MessageCircle, Lightbulb, Bot, ChevronRight, Plus, Trash2, Save, RotateCcw } from 'lucide-react';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -86,6 +15,15 @@ const App = () => {
   const [editingJournal, setEditingJournal] = useState(null);
   const [newAffirmation, setNewAffirmation] = useState('');
   const [newJournal, setNewJournal] = useState({ title: '', text: '' });
+  const [reminders, setReminders] = useState([]);
+  const [countdownTime, setCountdownTime] = useState(0);
+  const [countdownRunning, setCountdownRunning] = useState(false);
+  const [countdownMinutes, setCountdownMinutes] = useState(10);
+  const [timerType, setTimerType] = useState('countdown');
+  const [dailyTime, setDailyTime] = useState('09:00');
+  const [intervalHours, setIntervalHours] = useState(2);
+  const [timerMessage, setTimerMessage] = useState('');
+  const [showTimerAlert, setShowTimerAlert] = useState(false);
 
   const quotes = [
     { text: "If you will assume your desire and live there as though it were true, no power on earth can stop it from becoming a fact.", author: "Neville Goddard" },
@@ -119,10 +57,10 @@ const App = () => {
       subtitle: "This method helps you let go of old, burdensome stories and create a new reality.",
       description: "Often we carry experiences, thoughts or patterns within us that still influence us today - even though they are long gone. With this exercise you free yourself from them and rewrite your story - the way you really want to live it.",
       steps: [
-        "🕯️ Write down the old story: Take a situation that stresses or saddens you. Write everything down - as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
-        "🔥 Let go: When you're done, take the papers with your old story and burn them outside under safe conditions. Watch them dissolve in flames. Breathe deeply in and out - and feel that this version of your story no longer defines you.",
-        "🌷 Write the new story: Now rewrite your story - the way you would have liked to experience it. Be generous, creative and loving with yourself. Make yourself the main character where everything goes the way you dreamed.",
-        "✨ Live your new truth: Stay consciously in this new story for the next three days. When the old one resurfaces, say out loud: 'Stop! This is no longer my truth.' Then realign yourself inwardly - and remember: You decide which story is true."
+        "Write down the old story: Take a situation that stresses or saddens you. Write everything down as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
+        "Let go: When you are done, take the papers with your old story and burn them outside under safe conditions. Watch them dissolve in flames. Breathe deeply in and out and feel that this version of your story no longer defines you.",
+        "Write the new story: Now rewrite your story the way you would have liked to experience it. Be generous, creative and loving with yourself. Make yourself the main character where everything goes the way you dreamed.",
+        "Live your new truth: Stay consciously in this new story for the next three days. When the old one resurfaces, say out loud: Stop! This is no longer my truth. Then realign yourself inwardly and remember: You decide which story is true."
       ]
     },
     {
@@ -131,11 +69,11 @@ const App = () => {
       emoji: "🌷",
       icon: Flower2,
       subtitle: "This method helps you understand your desires on a deeper level.",
-      description: "Often we believe we want certain things - more money, a relationship, health - but in truth we long for a specific feeling that we associate with these things.",
+      description: "Often we believe we want certain things more money, a relationship, health but in truth we long for a specific feeling that we associate with these things.",
       steps: [
-        "💫 Recognize the true goal behind your wish: Take time to honestly explore which feeling you are actually seeking through your wish. Do you want security or freedom through money? Do you want comfort or appreciation through love? Do you want recognition or inner fulfillment through success? Recognize that it's never just about external things - but always about the feeling behind it.",
-        "🌷 Embody your new version: Now invite yourself to be a little more today the person you would be if your wish were already fulfilled. This doesn't mean you 'pretend' - but that you feel into this new version of yourself. How would you behave, think, speak, act if you had already achieved your goal? How would you drink your morning coffee if you were already rich, healthy or loved?",
-        "🌞 Recognize what's already there: Look at your current life: Where do you already experience this feeling in small moments? Maybe you feel security when you're in your home. Maybe love when you laugh with friends. When you consciously perceive and connect these feelings, you are already in the vibration of your wish."
+        "Recognize the true goal behind your wish: Take time to honestly explore which feeling you are actually seeking through your wish. Do you want security or freedom through money? Do you want comfort or appreciation through love? Do you want recognition or inner fulfillment through success? Recognize that it is never just about external things but always about the feeling behind it.",
+        "Embody your new version: Now invite yourself to be a little more today the person you would be if your wish were already fulfilled. This does not mean you pretend but that you feel into this new version of yourself. How would you behave, think, speak, act if you had already achieved your goal? How would you drink your morning coffee if you were already rich, healthy or loved?",
+        "Recognize what is already there: Look at your current life: Where do you already experience this feeling in small moments? Maybe you feel security when you are in your home. Maybe love when you laugh with friends. When you consciously perceive and connect these feelings, you are already in the vibration of your wish."
       ]
     },
     {
@@ -143,12 +81,12 @@ const App = () => {
       title: "I Am That I Am",
       emoji: "🌿",
       icon: Leaf,
-      subtitle: "This method helps you turn your focus away from doubt and negative thoughts - towards your true being.",
+      subtitle: "This method helps you turn your focus away from doubt and negative thoughts towards your true being.",
       description: "You already are what you wish to be. Only your doubt makes you believe that you are not yet. It consists of two parts: a short meditation and a thought exercise for everyday life.",
       steps: [
-        "🧘‍♀️ Part 1 - Meditation 'I Am': Take about 10 minutes morning and evening. Sit comfortably, close your eyes and repeat slowly and consciously: 'I am... I am... I am...' Stay completely with this feeling of I am. At the end of your meditation, briefly recall your new story from Method 1 and imagine it in bright colors. That's all - and yet very powerful.",
-        "💭 Part 2 - Thought Exercise 'Being in the Now': In conscious manifestation, it's about being present. Therefore accompany everything you do with silent mindfulness: I'm driving. I'm eating pasta. I'm brushing my teeth. Simply name quietly what you're doing right now. If you drift off - no problem. Just start again without judging yourself.",
-        "✨ This exercise brings you back to the now, where your true power lies: I am that I am."
+        "Part 1 Meditation I Am: Take about 10 minutes morning and evening. Sit comfortably, close your eyes and repeat slowly and consciously: I am... I am... I am... Stay completely with this feeling of I am. At the end of your meditation, briefly recall your new story from Method 1 and imagine it in bright colors. That is all and yet very powerful.",
+        "Part 2 Thought Exercise Being in the Now: In conscious manifestation, it is about being present. Therefore accompany everything you do with silent mindfulness: I am driving. I am eating pasta. I am brushing my teeth. Simply name quietly what you are doing right now. If you drift off no problem. Just start again without judging yourself.",
+        "This exercise brings you back to the now, where your true power lies: I am that I am."
       ]
     },
     {
@@ -157,12 +95,12 @@ const App = () => {
       emoji: "🗣️",
       icon: MessageCircle,
       subtitle: "This method invites you to communicate directly with your subconscious.",
-      description: "Instead of using old theories or 'reprogramming', you go a direct, mindful way: ask a question, listen and receive the inner answer.",
+      description: "Instead of using old theories or reprogramming, you go a direct, mindful way: ask a question, listen and receive the inner answer.",
       steps: [
-        "💭 Formulate question: Think of a concrete question you want an answer to. Examples: 'What blocks my manifestation?' 'What resistances should I resolve so my wish becomes reality?' Formulate the question as a gratitude sentence, as if you had already received the answer: 'Dear subconscious, thank you for your help with the question of what blocks my manifestation. Thanks to you, I now know what to do.'",
-        "🧘‍♀️ Listen patiently: Wait for a quiet, inner answer. The answer can be a word, a sentence, a feeling or a hint. Important: It feels friendly, supportive and light - unlike negative everyday thoughts. Thank inwardly for every answer.",
-        "🌞 Create right conditions: Choose a quiet time window without stress. Meditation beforehand can help you hear more clearly. Practice patience - answers often come within 48 hours.",
-        "✨ With this method you develop a mindful, trusting connection to your inner knowledge. Your subconscious always has helpful hints for you - you just need to learn to hear them."
+        "Formulate question: Think of a concrete question you want an answer to. Examples: What blocks my manifestation? What resistances should I resolve so my wish becomes reality? Formulate the question as a gratitude sentence, as if you had already received the answer: Dear subconscious, thank you for your help with the question of what blocks my manifestation. Thanks to you, I now know what to do.",
+        "Listen patiently: Wait for a quiet, inner answer. The answer can be a word, a sentence, a feeling or a hint. Important: It feels friendly, supportive and light unlike negative everyday thoughts. Thank inwardly for every answer.",
+        "Create right conditions: Choose a quiet time window without stress. Meditation beforehand can help you hear more clearly. Practice patience answers often come within 48 hours.",
+        "With this method you develop a mindful, trusting connection to your inner knowledge. Your subconscious always has helpful hints for you you just need to learn to hear them."
       ]
     },
     {
@@ -171,12 +109,12 @@ const App = () => {
       emoji: "💡",
       icon: Lightbulb,
       subtitle: "This method helps you consciously recognize which thoughts you think.",
-      description: "Especially those that distract you from your manifestation. Often we are more occupied with what we don't want, instead of what we wish for. This is where Thought Awareness comes in: Recognize your thoughts and realign them.",
+      description: "Especially those that distract you from your manifestation. Often we are more occupied with what we do not want, instead of what we wish for. This is where Thought Awareness comes in: Recognize your thoughts and realign them.",
       steps: [
-        "🧠 Perceive thoughts: Whenever you notice a thought about your current situation - especially about what you no longer want - make it conscious: 'Hey, I notice that I'm only dealing with what is and what I don't want.' Ask yourself: Are you seeing the reality in front of you or your desired situation? Don't judge, just pause briefly and consciously call your manifestation into your mental image.",
-        "🌞 Intensify visualization: Imagine how the light in your mental image gets brighter, like with a dimmable lamp - illuminate the scene of your desired reality. Visualize how your best friend sincerely congratulates you and is genuinely happy for you.",
-        "✨ Small reminders in everyday life: You can build in a small physical reminder, e.g. tap your arm twice with your finger to remind you of your manifestation. The more often you do this process, the more conscious you become of your thoughts and the easier it is to align them with what you really want.",
-        "💭 With this method you learn to actively guide your thoughts, let go of the negative and consciously nourish your manifestation."
+        "Perceive thoughts: Whenever you notice a thought about your current situation especially about what you no longer want make it conscious: Hey, I notice that I am only dealing with what is and what I do not want. Ask yourself: Are you seeing the reality in front of you or your desired situation? Do not judge, just pause briefly and consciously call your manifestation into your mental image.",
+        "Intensify visualization: Imagine how the light in your mental image gets brighter, like with a dimmable lamp illuminate the scene of your desired reality. Visualize how your best friend sincerely congratulates you and is genuinely happy for you.",
+        "Small reminders in everyday life: You can build in a small physical reminder, e.g. tap your arm twice with your finger to remind you of your manifestation. The more often you do this process, the more conscious you become of your thoughts and the easier it is to align them with what you really want.",
+        "With this method you learn to actively guide your thoughts, let go of the negative and consciously nourish your manifestation."
       ]
     },
     {
@@ -187,10 +125,10 @@ const App = () => {
       subtitle: "Robotic Affirmations means consciously reciting affirmations over a longer period or in large numbers.",
       description: "The method is controversial: some swear by it, others consider it ineffective. Applied correctly, however, it can be very powerful, especially at the beginning of your manifestation practice.",
       steps: [
-        "⚡ Bypass the ego: At the beginning you often encounter resistance from your ego - that inner system that wants to keep you in the old. It sends negative thoughts, doubts and fear to distract you. It's common to react to these thoughts - but that's exactly what keeps you trapped in old patterns. Robotic Affirmations help break this cycle.",
-        "🔄 Continuous loop of affirmation: Choose an affirmation that supports your manifestation and strengthens you. Repeat it for a certain time or number (e.g. morning, evening, during meditation). Goal: To saturate your mind so that the ego temporarily stays quiet and you feel inner stability.",
-        "🌿 Feel the effect: Over time you recognize how inner peace and balance feel. You react less to negative thoughts and gain freedom to consciously live your manifestations. Important: This is not a 'magic trick' - it's a practice that requires patience and regularity.",
-        "✨ Robotic Affirmations are a tool to calm your ego, align your mind and stabilize the vibration of your wishes."
+        "Bypass the ego: At the beginning you often encounter resistance from your ego that inner system that wants to keep you in the old. It sends negative thoughts, doubts and fear to distract you. It is common to react to these thoughts but that is exactly what keeps you trapped in old patterns. Robotic Affirmations help break this cycle.",
+        "Continuous loop of affirmation: Choose an affirmation that supports your manifestation and strengthens you. Repeat it for a certain time or number e.g. morning, evening, during meditation. Goal: To saturate your mind so that the ego temporarily stays quiet and you feel inner stability.",
+        "Feel the effect: Over time you recognize how inner peace and balance feel. You react less to negative thoughts and gain freedom to consciously live your manifestations. Important: This is not a magic trick it is a practice that requires patience and regularity.",
+        "Robotic Affirmations are a tool to calm your ego, align your mind and stabilize the vibration of your wishes."
       ]
     }
   ];
@@ -254,6 +192,55 @@ const App = () => {
     localStorage.setItem('counter', counter.toString());
   }, [counter]);
 
+  useEffect(() => {
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+  }, [reminders]);
+
+  useEffect(() => {
+    let interval;
+    if (countdownRunning && countdownTime > 0) {
+      interval = setInterval(() => {
+        setCountdownTime(prev => {
+          if (prev <= 1) {
+            setCountdownRunning(false);
+            setTimerMessage('Time is up! Take a moment to reflect on your practice.');
+            setShowTimerAlert(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [countdownRunning, countdownTime]);
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  };
+
+  const startCountdown = () => {
+    setCountdownTime(countdownMinutes * 60);
+    setCountdownRunning(true);
+  };
+
+  const addReminder = (type) => {
+    const newReminder = {
+      id: Date.now(),
+      type,
+      time: type === 'daily' ? dailyTime : null,
+      hours: type === 'interval' ? intervalHours : null,
+      message: timerMessage || (affirmations.length > 0 ? affirmations[Math.floor(Math.random() * affirmations.length)].text : 'Time for your practice!')
+    };
+    setReminders([...reminders, newReminder]);
+    setTimerMessage('');
+  };
+
+  const deleteReminder = (id) => {
+    setReminders(reminders.filter(r => r.id !== id));
+  };
+
   const addAffirmation = () => {
     if (newAffirmation.trim()) {
       setAffirmations([...affirmations, { id: Date.now(), text: newAffirmation }]);
@@ -314,7 +301,7 @@ const App = () => {
             { page: 'methods', icon: BookOpen, label: 'Methods' },
             { page: 'affirmations', icon: Edit3, label: 'Affirmations' },
             { page: 'journal', icon: Edit3, label: 'Journal' },
-            { page: 'timer', icon: Clock, label: 'Timer & Reminders' },
+            { page: 'timer', icon: Clock, label: 'Timer' },
             { page: 'counter', icon: Hash, label: 'Counter' },
           ].map(item => (
             <button
@@ -332,7 +319,7 @@ const App = () => {
               className="flex items-center space-x-3 w-full p-3 rounded-lg bg-amber-100 hover:bg-amber-200 transition text-amber-900"
             >
               <Coffee size={20} />
-              <span className="font-light">Support ☕</span>
+              <span className="font-light">Support</span>
             </button>
           </div>
         </nav>
@@ -349,7 +336,7 @@ const App = () => {
       
       <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
         <p className="text-lg text-gray-700 leading-relaxed italic">
-          "{quotes[dailyQuoteIndex].text}"
+          {quotes[dailyQuoteIndex].text}
         </p>
         <p className="text-right text-rose-600 mt-4 italic">— {quotes[dailyQuoteIndex].author}</p>
       </div>
@@ -507,420 +494,4 @@ const App = () => {
     </div>
   );
 
-  const JournalPage = () => (
-    <div className="max-w-3xl mx-auto p-6 pb-24">
-      <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Your Journal</h2>
-      
-      <div className="bg-white rounded-2xl p-6 shadow-lg mb-6 border border-rose-100">
-        <input
-          type="text"
-          value={newJournal.title}
-          onChange={(e) => setNewJournal({ ...newJournal, title: e.target.value })}
-          placeholder="Entry title..."
-          className="w-full p-3 mb-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
-        />
-        <textarea
-          value={newJournal.text}
-          onChange={(e) => setNewJournal({ ...newJournal, text: e.target.value })}
-          placeholder="Write your thoughts, insights, and reflections..."
-          rows="6"
-          className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none"
-        />
-        <button
-          onClick={addJournalEntry}
-          className="mt-3 bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition flex items-center space-x-2 active:scale-95"
-        >
-          <Save size={20} />
-          <span>Save Entry</span>
-        </button>
-      </div>
-
-      <div className="space-y-4">
-        {journalEntries.length === 0 ? (
-          <div className="text-center py-12 text-gray-400">
-            <BookOpen size={48} className="mx-auto mb-4 opacity-50" />
-            <p>No journal entries yet. Start writing your journey! 📝</p>
-          </div>
-        ) : (
-          journalEntries.map(entry => (
-            <div key={entry.id} className="bg-white rounded-xl p-6 shadow-md border border-rose-100">
-              {editingJournal === entry.id ? (
-                <div>
-                  <input
-                    type="text"
-                    defaultValue={entry.title}
-                    onBlur={(e) => updateJournalEntry(entry.id, { title: e.target.value })}
-                    className="w-full p-2 mb-2 border border-rose-200 rounded focus:outline-none focus:ring-2 focus:ring-rose-300"
-                  />
-                  <textarea
-                    defaultValue={entry.text}
-                    onBlur={(e) => updateJournalEntry(entry.id, { text: e.target.value })}
-                    rows="6"
-                    className="w-full p-2 border border-rose-200 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none"
-                  />
-                </div>
-              ) : (
-                <div>
-                  <div className="flex justify-between items-start mb-3">
-                    <div>
-                      <h3 className="text-xl font-light text-rose-900">{entry.title}</h3>
-                      <p className="text-sm text-gray-500">{entry.date}</p>
-                    </div>
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => setEditingJournal(entry.id)}
-                        className="text-amber-600 hover:text-amber-800"
-                      >
-                        <Edit3 size={18} />
-                      </button>
-                      <button
-                        onClick={() => deleteJournalEntry(entry.id)}
-                        className="text-rose-600 hover:text-rose-800"
-                      >
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 whitespace-pre-wrap">{entry.text}</p>
-                </div>
-              )}
-            </div>
-          ))
-        )}
-      </div>
-    </div>
-  );
-
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-  };
-
-  const startCountdown = () => {
-    setCountdownTime(countdownMinutes * 60);
-    setCountdownRunning(true);
-  };
-
-  const addReminder = (type) => {
-    const newReminder = {
-      id: Date.now(),
-      type,
-      time: type === 'daily' ? dailyTime : null,
-      hours: type === 'interval' ? intervalHours : null,
-      message: timerMessage || (affirmations.length > 0 ? affirmations[Math.floor(Math.random() * affirmations.length)].text : 'Time for your practice! 🌸')
-    };
-    setReminders([...reminders, newReminder]);
-    setShowReminderForm(false);
-    setTimerMessage('');
-  };
-
-  const deleteReminder = (id) => {
-    const reminder = reminders.find(r => r.id === id);
-    if (reminder && reminder.intervalId) {
-      clearInterval(reminder.intervalId);
-    }
-    setReminders(reminders.filter(r => r.id !== id));
-  };
-
-  const TimerPage = () => (
-    <div className="max-w-3xl mx-auto p-6 pb-24">
-      <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Timer & Reminders</h2>
-      
-      <div className="space-y-6">
-        <div className="flex space-x-4 mb-6">
-          <button
-            onClick={() => setTimerType('countdown')}
-            className={`flex-1 p-3 rounded-xl transition ${timerType === 'countdown' ? 'bg-rose-500 text-white' : 'bg-white text-gray-700 border border-rose-200'}`}
-          >
-            Countdown
-          </button>
-          <button
-            onClick={() => setTimerType('daily')}
-            className={`flex-1 p-3 rounded-xl transition ${timerType === 'daily' ? 'bg-rose-500 text-white' : 'bg-white text-gray-700 border border-rose-200'}`}
-          >
-            Daily
-          </button>
-          <button
-            onClick={() => setTimerType('interval')}
-            className={`flex-1 p-3 rounded-xl transition ${timerType === 'interval' ? 'bg-rose-500 text-white' : 'bg-white text-gray-700 border border-rose-200'}`}
-          >
-            Interval
-          </button>
-        </div>
-
-        {timerType === 'countdown' && (
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
-            <h3 className="text-xl font-light text-rose-900 mb-4 text-center">Countdown Timer</h3>
-            <p className="text-gray-600 text-center mb-6">Set a timer for meditation or practice</p>
-            
-            {!countdownRunning ? (
-              <div className="space-y-6">
-                <div className="flex items-center justify-center space-x-4">
-                  <button
-                    onClick={() => setCountdownMinutes(Math.max(1, countdownMinutes - 1))}
-                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
-                  >
-                    -
-                  </button>
-                  <div className="text-5xl font-light text-rose-600 w-32 text-center">
-                    {countdownMinutes}
-                  </div>
-                  <button
-                    onClick={() => setCountdownMinutes(countdownMinutes + 1)}
-                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
-                  >
-                    +
-                  </button>
-                </div>
-                <p className="text-center text-gray-500">minutes</p>
-                <button
-                  onClick={startCountdown}
-                  className="w-full bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
-                >
-                  Start Timer
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-6">
-                <div className="text-7xl font-light text-rose-600 text-center">
-                  {formatTime(countdownTime)}
-                </div>
-                <div className="flex space-x-4">
-                  <button
-                    onClick={() => setCountdownRunning(false)}
-                    className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-xl hover:bg-gray-300 transition"
-                  >
-                    Pause
-                  </button>
-                  <button
-                    onClick={() => { setCountdownRunning(false); setCountdownTime(0); }}
-                    className="flex-1 bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
-                  >
-                    Stop
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {timerType === 'daily' && (
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
-            <h3 className="text-xl font-light text-rose-900 mb-4 text-center">Daily Reminder</h3>
-            <p className="text-gray-600 text-center mb-6">Set a daily reminder at a specific time</p>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm text-gray-600 mb-2">Time</label>
-                <input
-                  type="time"
-                  value={dailyTime}
-                  onChange={(e) => setDailyTime(e.target.value)}
-                  className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-600 mb-2">Message (optional)</label>
-                <input
-                  type="text"
-                  value={timerMessage}
-                  onChange={(e) => setTimerMessage(e.target.value)}
-                  placeholder="Time for your affirmations..."
-                  className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
-                />
-              </div>
-              <button
-                onClick={() => addReminder('daily')}
-                className="w-full bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
-              >
-                Add Daily Reminder
-              </button>
-            </div>
-          </div>
-        )}
-
-        {timerType === 'interval' && (
-          <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
-            <h3 className="text-xl font-light text-rose-900 mb-4 text-center">Interval Reminder</h3>
-            <p className="text-gray-600 text-center mb-6">Get reminded every few hours</p>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm text-gray-600 mb-2">Every X hours</label>
-                <div className="flex items-center space-x-4">
-                  <button
-                    onClick={() => setIntervalHours(Math.max(1, intervalHours - 1))}
-                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
-                  >
-                    -
-                  </button>
-                  <div className="text-4xl font-light text-rose-600 w-20 text-center">
-                    {intervalHours}
-                  </div>
-                  <button
-                    onClick={() => setIntervalHours(intervalHours + 1)}
-                    className="bg-rose-100 text-rose-700 w-12 h-12 rounded-full hover:bg-rose-200 transition"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm text-gray-600 mb-2">Message (optional)</label>
-                <input
-                  type="text"
-                  value={timerMessage}
-                  onChange={(e) => setTimerMessage(e.target.value)}
-                  placeholder="Check in with your manifestation..."
-                  className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
-                />
-              </div>
-              <button
-                onClick={() => addReminder('interval')}
-                className="w-full bg-rose-500 text-white py-4 rounded-xl hover:bg-rose-600 transition"
-              >
-                Add Interval Reminder
-              </button>
-            </div>
-          </div>
-        )}
-
-        {reminders.length > 0 && (
-          <div className="mt-8">
-            <h3 className="text-xl font-light text-rose-900 mb-4">Active Reminders</h3>
-            <div className="space-y-3">
-              {reminders.map(reminder => (
-                <div key={reminder.id} className="bg-white rounded-xl p-4 shadow-md border border-rose-100 flex justify-between items-center">
-                  <div>
-                    <p className="text-gray-800 font-light">
-                      {reminder.type === 'daily' && `Daily at ${reminder.time}`}
-                      {reminder.type === 'interval' && `Every ${reminder.hours} hour${reminder.hours > 1 ? 's' : ''}`}
-                    </p>
-                    {reminder.message && (
-                      <p className="text-sm text-gray-500 mt-1">{reminder.message}</p>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => deleteReminder(reminder.id)}
-                    className="text-rose-600 hover:text-rose-800"
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  const TimerAlert = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowTimerAlert(false)}>
-      <div className="bg-white rounded-3xl p-8 max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <div className="text-center space-y-4">
-          <Clock size={64} className="mx-auto text-rose-500" />
-          <h3 className="text-2xl font-light text-rose-900">Timer Alert</h3>
-          <p className="text-gray-700 text-lg">{timerMessage}</p>
-          <button
-            onClick={() => setShowTimerAlert(false)}
-            className="bg-rose-500 text-white px-8 py-3 rounded-xl hover:bg-rose-600 transition"
-          >
-            Got it! ✨
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const CounterPage = () => (
-    <div className="max-w-2xl mx-auto p-6 pb-24">
-      <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Counter</h2>
-      
-      <div className="bg-white rounded-2xl p-12 shadow-lg border border-rose-100 text-center">
-        <p className="text-gray-600 mb-8">Track your affirmation repetitions, meditation days, or any habit you want to count.</p>
-        
-        <div className="text-8xl font-light text-rose-600 mb-12">
-          {counter}
-        </div>
-        
-        <div className="flex flex-col items-center space-y-6">
-          <button
-            onClick={() => setCounter(counter + 1)}
-            className="w-32 h-32 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition shadow-xl flex items-center justify-center active:scale-95"
-          >
-            <Plus size={48} strokeWidth={2} />
-          </button>
-          
-          <button
-            onClick={() => setCounter(0)}
-            className="bg-gray-200 text-gray-600 px-6 py-2 rounded-lg hover:bg-gray-300 transition text-sm flex items-center space-x-2 active:scale-95"
-          >
-            <RotateCcw size={16} />
-            <span>Reset</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  const SupportMessage = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => {
-      setShowSupportMessage(false);
-      localStorage.setItem('supportMessageShown', 'true');
-    }}>
-      <div className="bg-white rounded-3xl p-8 max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <div className="text-center space-y-4">
-          <Coffee size={48} className="mx-auto text-amber-600" />
-          <h3 className="text-2xl font-light text-rose-900">Enjoying the app?</h3>
-          <p className="text-gray-600">
-            If this app brings value to your manifestation journey, consider supporting its development with a small coffee. Your support helps keep the app free and ad-free! ☕
-          </p>
-          <div className="flex space-x-3 justify-center mt-6">
-            <button
-              onClick={() => {
-                window.open('https://buymeacoffee.com/simoneullmer', '_blank');
-                setShowSupportMessage(false);
-                localStorage.setItem('supportMessageShown', 'true');
-              }}
-              className="bg-amber-500 text-white px-6 py-3 rounded-xl hover:bg-amber-600 transition"
-            >
-              Buy me a coffee ☕
-            </button>
-            <button
-              onClick={() => {
-                setShowSupportMessage(false);
-                localStorage.setItem('supportMessageShown', 'true');
-              }}
-              className="bg-gray-200 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-300 transition"
-            >
-              Maybe later
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-rose-50">
-      <Header />
-      {menuOpen && <NavigationMenu />}
-      {showSupportMessage && <SupportMessage />}
-      {showTimerAlert && <TimerAlert />}
-      
-      <main className="min-h-screen">
-        {currentPage === 'home' && <HomePage />}
-        {currentPage === 'methods' && !selectedMethod && <MethodsPage />}
-        {currentPage === 'methods' && selectedMethod && <MethodDetailPage />}
-        {currentPage === 'affirmations' && <AffirmationsPage />}
-        {currentPage === 'journal' && <JournalPage />}
-        {currentPage === 'timer' && <TimerPage />}
-        {currentPage === 'counter' && <CounterPage />}
-      </main>
-    </div>
-  );
-};
-
-export default App;
+  const JournalPage =
