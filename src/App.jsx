@@ -53,82 +53,76 @@ const App = () => {
       id: 1,
       title: "Old Story – New Story",
       emoji: "🔥",
-      icon: Flame,
       subtitle: "This method helps you let go of old, burdensome stories and create a new reality.",
       description: "Often we carry experiences, thoughts or patterns within us that still influence us today - even though they are long gone. With this exercise you free yourself from them and rewrite your story - the way you really want to live it.",
       steps: [
-        "Write down the old story: Take a situation that stresses or saddens you. Write everything down as honestly and detailed as possible. Describe what happened, what you feel, and what hurts or angers you. Let it all out. Everything is allowed.",
-        "Let go: When you are done, take the papers with your old story and burn them outside under safe conditions. Watch them dissolve in flames. Breathe deeply in and out and feel that this version of your story no longer defines you.",
-        "Write the new story: Now rewrite your story the way you would have liked to experience it. Be generous, creative and loving with yourself. Make yourself the main character where everything goes the way you dreamed.",
-        "Live your new truth: Stay consciously in this new story for the next three days. When the old one resurfaces, say out loud: Stop! This is no longer my truth. Then realign yourself inwardly and remember: You decide which story is true."
+        "Write down the old story: Take a situation that stresses or saddens you. Write everything down as honestly and detailed as possible.",
+        "Let go: Burn the papers outside under safe conditions. Watch them dissolve in flames.",
+        "Write the new story: Rewrite your story the way you would have liked to experience it.",
+        "Live your new truth: Stay in this new story for three days. When the old resurfaces, say: Stop! This is no longer my truth."
       ]
     },
     {
       id: 2,
       title: "Feel the Feeling",
       emoji: "🌷",
-      icon: Flower2,
-      subtitle: "This method helps you understand your desires on a deeper level.",
-      description: "Often we believe we want certain things more money, a relationship, health but in truth we long for a specific feeling that we associate with these things.",
+      subtitle: "Feel the true emotion behind your desire and become the person who lives your manifestation.",
+      description: "Often we believe we want certain things, but in truth we long for a specific feeling.",
       steps: [
-        "Recognize the true goal behind your wish: Take time to honestly explore which feeling you are actually seeking through your wish. Do you want security or freedom through money? Do you want comfort or appreciation through love? Do you want recognition or inner fulfillment through success? Recognize that it is never just about external things but always about the feeling behind it.",
-        "Embody your new version: Now invite yourself to be a little more today the person you would be if your wish were already fulfilled. This does not mean you pretend but that you feel into this new version of yourself. How would you behave, think, speak, act if you had already achieved your goal? How would you drink your morning coffee if you were already rich, healthy or loved?",
-        "Recognize what is already there: Look at your current life: Where do you already experience this feeling in small moments? Maybe you feel security when you are in your home. Maybe love when you laugh with friends. When you consciously perceive and connect these feelings, you are already in the vibration of your wish."
+        "Recognize the true goal: What feeling are you seeking?",
+        "Embody your new version: Be the person who already has it.",
+        "Recognize what is already there: Where do you feel this already?"
       ]
     },
     {
       id: 3,
       title: "I Am That I Am",
       emoji: "🌿",
-      icon: Leaf,
-      subtitle: "This method helps you turn your focus away from doubt and negative thoughts towards your true being.",
-      description: "You already are what you wish to be. Only your doubt makes you believe that you are not yet. It consists of two parts: a short meditation and a thought exercise for everyday life.",
+      subtitle: "Focus on meditation and thought exercises to dissolve doubt.",
+      description: "You already are what you wish to be. Only your doubt makes you believe otherwise.",
       steps: [
-        "Part 1 Meditation I Am: Take about 10 minutes morning and evening. Sit comfortably, close your eyes and repeat slowly and consciously: I am... I am... I am... Stay completely with this feeling of I am. At the end of your meditation, briefly recall your new story from Method 1 and imagine it in bright colors. That is all and yet very powerful.",
-        "Part 2 Thought Exercise Being in the Now: In conscious manifestation, it is about being present. Therefore accompany everything you do with silent mindfulness: I am driving. I am eating pasta. I am brushing my teeth. Simply name quietly what you are doing right now. If you drift off no problem. Just start again without judging yourself.",
-        "This exercise brings you back to the now, where your true power lies: I am that I am."
+        "Meditation: 10 minutes morning and evening, repeat I am.",
+        "Thought Exercise: Name your actions mindfully throughout the day.",
+        "Stay present: This brings you back to your true power."
       ]
     },
     {
       id: 4,
       title: "Talk to Me – Subconscious",
       emoji: "🗣️",
-      icon: MessageCircle,
-      subtitle: "This method invites you to communicate directly with your subconscious.",
-      description: "Instead of using old theories or reprogramming, you go a direct, mindful way: ask a question, listen and receive the inner answer.",
+      subtitle: "Communicate directly with your subconscious.",
+      description: "Ask a question, listen, and receive the inner answer.",
       steps: [
-        "Formulate question: Think of a concrete question you want an answer to. Examples: What blocks my manifestation? What resistances should I resolve so my wish becomes reality? Formulate the question as a gratitude sentence, as if you had already received the answer: Dear subconscious, thank you for your help with the question of what blocks my manifestation. Thanks to you, I now know what to do.",
-        "Listen patiently: Wait for a quiet, inner answer. The answer can be a word, a sentence, a feeling or a hint. Important: It feels friendly, supportive and light unlike negative everyday thoughts. Thank inwardly for every answer.",
-        "Create right conditions: Choose a quiet time window without stress. Meditation beforehand can help you hear more clearly. Practice patience answers often come within 48 hours.",
-        "With this method you develop a mindful, trusting connection to your inner knowledge. Your subconscious always has helpful hints for you you just need to learn to hear them."
+        "Formulate question as gratitude sentence.",
+        "Listen patiently for a quiet answer.",
+        "Create right conditions: quiet time, after meditation.",
+        "Trust the process within 48 hours."
       ]
     },
     {
       id: 5,
       title: "Thought Awareness",
       emoji: "💡",
-      icon: Lightbulb,
-      subtitle: "This method helps you consciously recognize which thoughts you think.",
-      description: "Especially those that distract you from your manifestation. Often we are more occupied with what we do not want, instead of what we wish for. This is where Thought Awareness comes in: Recognize your thoughts and realign them.",
+      subtitle: "Consciously recognize and redirect your thoughts.",
+      description: "Notice when you think about what you don't want and shift to your desire.",
       steps: [
-        "Perceive thoughts: Whenever you notice a thought about your current situation especially about what you no longer want make it conscious: Hey, I notice that I am only dealing with what is and what I do not want. Ask yourself: Are you seeing the reality in front of you or your desired situation? Do not judge, just pause briefly and consciously call your manifestation into your mental image.",
-        "Intensify visualization: Imagine how the light in your mental image gets brighter, like with a dimmable lamp illuminate the scene of your desired reality. Visualize how your best friend sincerely congratulates you and is genuinely happy for you.",
-        "Small reminders in everyday life: You can build in a small physical reminder, e.g. tap your arm twice with your finger to remind you of your manifestation. The more often you do this process, the more conscious you become of your thoughts and the easier it is to align them with what you really want.",
-        "With this method you learn to actively guide your thoughts, let go of the negative and consciously nourish your manifestation."
+        "Perceive thoughts without judgment.",
+        "Visualize your desired reality brighter.",
+        "Use physical reminders like tapping your arm.",
+        "Practice regularly to strengthen awareness."
       ]
     },
     {
       id: 6,
       title: "Robotic Affirmations",
       emoji: "🤖",
-      icon: Bot,
-      subtitle: "Robotic Affirmations means consciously reciting affirmations over a longer period or in large numbers.",
-      description: "The method is controversial: some swear by it, others consider it ineffective. Applied correctly, however, it can be very powerful, especially at the beginning of your manifestation practice.",
+      subtitle: "Repeat affirmations to calm ego resistance.",
+      description: "Saturate your mind with positive affirmations.",
       steps: [
-        "Bypass the ego: At the beginning you often encounter resistance from your ego that inner system that wants to keep you in the old. It sends negative thoughts, doubts and fear to distract you. It is common to react to these thoughts but that is exactly what keeps you trapped in old patterns. Robotic Affirmations help break this cycle.",
-        "Continuous loop of affirmation: Choose an affirmation that supports your manifestation and strengthens you. Repeat it for a certain time or number e.g. morning, evening, during meditation. Goal: To saturate your mind so that the ego temporarily stays quiet and you feel inner stability.",
-        "Feel the effect: Over time you recognize how inner peace and balance feel. You react less to negative thoughts and gain freedom to consciously live your manifestations. Important: This is not a magic trick it is a practice that requires patience and regularity.",
-        "Robotic Affirmations are a tool to calm your ego, align your mind and stabilize the vibration of your wishes."
+        "Choose a supporting affirmation.",
+        "Repeat regularly in a loop.",
+        "Feel inner peace and stability grow.",
+        "Be patient - it's a practice."
       ]
     }
   ];
@@ -170,8 +164,7 @@ const App = () => {
     if (savedAffirmations) {
       const affs = JSON.parse(savedAffirmations);
       if (affs.length > 0) {
-        const randomAff = affs[Math.floor(Math.random() * affs.length)];
-        setAffirmationOfDay(randomAff);
+        setAffirmationOfDay(affs[Math.floor(Math.random() * affs.length)]);
       }
     }
   }, []);
@@ -179,8 +172,7 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('affirmations', JSON.stringify(affirmations));
     if (affirmations.length > 0 && Math.random() > 0.7) {
-      const randomAff = affirmations[Math.floor(Math.random() * affirmations.length)];
-      setAffirmationOfDay(randomAff);
+      setAffirmationOfDay(affirmations[Math.floor(Math.random() * affirmations.length)]);
     }
   }, [affirmations]);
 
@@ -203,7 +195,7 @@ const App = () => {
         setCountdownTime(prev => {
           if (prev <= 1) {
             setCountdownRunning(false);
-            setTimerMessage('Time is up! Take a moment to reflect on your practice.');
+            setTimerMessage('Time is up! Reflect on your practice.');
             setShowTimerAlert(true);
             return 0;
           }
@@ -231,7 +223,7 @@ const App = () => {
       type,
       time: type === 'daily' ? dailyTime : null,
       hours: type === 'interval' ? intervalHours : null,
-      message: timerMessage || (affirmations.length > 0 ? affirmations[Math.floor(Math.random() * affirmations.length)].text : 'Time for your practice!')
+      message: timerMessage || 'Time for your practice!'
     };
     setReminders([...reminders, newReminder]);
     setTimerMessage('');
@@ -277,221 +269,181 @@ const App = () => {
     setEditingJournal(null);
   };
 
-  const Header = () => (
-    <div className="bg-gradient-to-r from-rose-50 to-amber-50 p-6 shadow-sm sticky top-0 z-40">
-      <div className="flex justify-between items-center max-w-6xl mx-auto">
-        <h1 className="text-2xl font-light text-rose-900">Manifestation App 🌸</h1>
-        <button onClick={() => setMenuOpen(!menuOpen)} className="text-rose-900 p-2">
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-    </div>
-  );
-
-  const NavigationMenu = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setMenuOpen(false)}>
-      <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-b from-rose-50 to-amber-50 shadow-2xl p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-xl font-light text-rose-900">Menu</h2>
-          <button onClick={() => setMenuOpen(false)}><X size={24} className="text-rose-900" /></button>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-rose-50">
+      <div className="bg-gradient-to-r from-rose-50 to-amber-50 p-6 shadow-sm sticky top-0 z-40">
+        <div className="flex justify-between items-center max-w-6xl mx-auto">
+          <h1 className="text-2xl font-light text-rose-900">Manifestation App 🌸</h1>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="text-rose-900 p-2">
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-        <nav className="space-y-4">
-          {[
-            { page: 'home', icon: Heart, label: 'Home' },
-            { page: 'methods', icon: BookOpen, label: 'Methods' },
-            { page: 'affirmations', icon: Edit3, label: 'Affirmations' },
-            { page: 'journal', icon: Edit3, label: 'Journal' },
-            { page: 'timer', icon: Clock, label: 'Timer' },
-            { page: 'counter', icon: Hash, label: 'Counter' },
-          ].map(item => (
-            <button
-              key={item.page}
-              onClick={() => { setCurrentPage(item.page); setMenuOpen(false); setSelectedMethod(null); }}
-              className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"
-            >
-              <item.icon size={20} />
-              <span className="font-light">{item.label}</span>
-            </button>
-          ))}
-          <div className="pt-6 border-t border-rose-200">
-            <button
-              onClick={() => window.open('https://buymeacoffee.com/simoneullmer', '_blank')}
-              className="flex items-center space-x-3 w-full p-3 rounded-lg bg-amber-100 hover:bg-amber-200 transition text-amber-900"
-            >
-              <Coffee size={20} />
-              <span className="font-light">Support</span>
-            </button>
+      </div>
+
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setMenuOpen(false)}>
+          <div className="absolute right-0 top-0 h-full w-80 bg-gradient-to-b from-rose-50 to-amber-50 shadow-2xl p-6 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-xl font-light text-rose-900">Menu</h2>
+              <button onClick={() => setMenuOpen(false)}><X size={24} /></button>
+            </div>
+            <nav className="space-y-4">
+              <button onClick={() => { setCurrentPage('home'); setMenuOpen(false); setSelectedMethod(null); }} className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"><Heart size={20} /><span>Home</span></button>
+              <button onClick={() => { setCurrentPage('methods'); setMenuOpen(false); setSelectedMethod(null); }} className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"><BookOpen size={20} /><span>Methods</span></button>
+              <button onClick={() => { setCurrentPage('affirmations'); setMenuOpen(false); setSelectedMethod(null); }} className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"><Edit3 size={20} /><span>Affirmations</span></button>
+              <button onClick={() => { setCurrentPage('journal'); setMenuOpen(false); setSelectedMethod(null); }} className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"><Edit3 size={20} /><span>Journal</span></button>
+              <button onClick={() => { setCurrentPage('timer'); setMenuOpen(false); setSelectedMethod(null); }} className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"><Clock size={20} /><span>Timer</span></button>
+              <button onClick={() => { setCurrentPage('counter'); setMenuOpen(false); setSelectedMethod(null); }} className="flex items-center space-x-3 w-full p-3 rounded-lg hover:bg-rose-100 transition text-rose-900 text-left"><Hash size={20} /><span>Counter</span></button>
+              <div className="pt-6 border-t border-rose-200">
+                <button onClick={() => window.open('https://buymeacoffee.com/simoneullmer', '_blank')} className="flex items-center space-x-3 w-full p-3 rounded-lg bg-amber-100 hover:bg-amber-200 transition text-amber-900"><Coffee size={20} /><span>Support</span></button>
+              </div>
+            </nav>
           </div>
-        </nav>
-      </div>
-    </div>
-  );
-
-  const HomePage = () => (
-    <div className="max-w-2xl mx-auto p-6 space-y-8 pb-24">
-      <div className="text-center space-y-4">
-        <h2 className="text-3xl font-light text-rose-900">Welcome beautiful soul</h2>
-        <p className="text-lg text-rose-700">to your personal Manifestation App 🌸</p>
-      </div>
-      
-      <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
-        <p className="text-lg text-gray-700 leading-relaxed italic">
-          {quotes[dailyQuoteIndex].text}
-        </p>
-        <p className="text-right text-rose-600 mt-4 italic">— {quotes[dailyQuoteIndex].author}</p>
-      </div>
-
-      {affirmationOfDay && (
-        <div className="bg-gradient-to-br from-amber-50 to-rose-50 rounded-2xl p-6 shadow-md border border-amber-100">
-          <p className="text-sm text-amber-700 mb-2">✨ Your Affirmation of the Day</p>
-          <p className="text-lg text-gray-800">{affirmationOfDay.text}</p>
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-4">
-        {[
-          { page: 'methods', icon: BookOpen, label: 'Methods', color: 'bg-rose-100 hover:bg-rose-200' },
-          { page: 'affirmations', icon: Edit3, label: 'Affirmations', color: 'bg-amber-100 hover:bg-amber-200' },
-          { page: 'journal', icon: Edit3, label: 'Journal', color: 'bg-rose-100 hover:bg-rose-200' },
-          { page: 'counter', icon: Hash, label: 'Counter', color: 'bg-amber-100 hover:bg-amber-200' },
-        ].map(item => (
-          <button
-            key={item.page}
-            onClick={() => setCurrentPage(item.page)}
-            className={`${item.color} p-6 rounded-2xl transition shadow-md flex flex-col items-center space-y-2 active:scale-95`}
-          >
-            <item.icon size={32} className="text-gray-700" />
-            <span className="font-light text-gray-900">{item.label}</span>
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-
-  const MethodsPage = () => (
-    <div className="max-w-4xl mx-auto p-6 pb-24">
-      <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Manifestation Methods</h2>
-      <div className="grid md:grid-cols-2 gap-6">
-        {methods.map(method => (
-          <div
-            key={method.id}
-            onClick={() => setSelectedMethod(method)}
-            className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition cursor-pointer border border-rose-100 active:scale-95"
-          >
-            <div className="flex items-center space-x-3 mb-3">
-              <span className="text-4xl">{method.emoji}</span>
-              <h3 className="text-xl font-light text-rose-900">{method.title}</h3>
-            </div>
-            <p className="text-gray-600 text-sm">{method.subtitle}</p>
-            <div className="mt-4 flex items-center text-rose-600 text-sm">
-              <span>Learn more</span>
-              <ChevronRight size={16} className="ml-1" />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  const MethodDetailPage = () => (
-    <div className="max-w-3xl mx-auto p-6 pb-24">
-      <button
-        onClick={() => setSelectedMethod(null)}
-        className="mb-6 text-rose-600 hover:text-rose-800 flex items-center"
-      >
-        ← Back to Methods
-      </button>
-      <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
-        <div className="flex items-center space-x-4 mb-6">
-          <span className="text-5xl">{selectedMethod.emoji}</span>
-          <h2 className="text-3xl font-light text-rose-900">{selectedMethod.title}</h2>
-        </div>
-        <p className="text-gray-700 text-lg mb-4 font-light italic">{selectedMethod.subtitle}</p>
-        {selectedMethod.description && (
-          <p className="text-gray-600 mb-6 leading-relaxed">{selectedMethod.description}</p>
-        )}
-        <div className="space-y-6">
-          <h3 className="text-xl font-light text-rose-800 mb-4">Steps:</h3>
-          {selectedMethod.steps.map((step, index) => (
-            <div key={index} className="flex space-x-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center text-rose-900 font-light text-sm">
-                {index + 1}
+      {showSupportMessage && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => { setShowSupportMessage(false); localStorage.setItem('supportMessageShown', 'true'); }}>
+          <div className="bg-white rounded-3xl p-8 max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="text-center space-y-4">
+              <Coffee size={48} className="mx-auto text-amber-600" />
+              <h3 className="text-2xl font-light text-rose-900">Enjoying the app?</h3>
+              <p className="text-gray-600">If this app brings value to your manifestation journey, consider supporting its development!</p>
+              <div className="flex space-x-3 justify-center mt-6">
+                <button onClick={() => { window.open('https://buymeacoffee.com/simoneullmer', '_blank'); setShowSupportMessage(false); localStorage.setItem('supportMessageShown', 'true'); }} className="bg-amber-500 text-white px-6 py-3 rounded-xl hover:bg-amber-600 transition">Buy me a coffee</button>
+                <button onClick={() => { setShowSupportMessage(false); localStorage.setItem('supportMessageShown', 'true'); }} className="bg-gray-200 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-300 transition">Maybe later</button>
               </div>
-              <p className="text-gray-700 pt-1 leading-relaxed">{step}</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  const AffirmationsPage = () => (
-    <div className="max-w-3xl mx-auto p-6 pb-24">
-      <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Your Affirmations</h2>
-      
-      <div className="bg-white rounded-2xl p-6 shadow-lg mb-6 border border-rose-100">
-        <div className="flex space-x-2">
-          <input
-            type="text"
-            value={newAffirmation}
-            onChange={(e) => setNewAffirmation(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && addAffirmation()}
-            placeholder="Write your affirmation..."
-            className="flex-1 p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300"
-          />
-          <button
-            onClick={addAffirmation}
-            className="bg-rose-500 text-white p-3 rounded-lg hover:bg-rose-600 transition active:scale-95"
-          >
-            <Plus size={24} />
-          </button>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        {affirmations.length === 0 ? (
-          <div className="text-center py-12 text-gray-400">
-            <Edit3 size={48} className="mx-auto mb-4 opacity-50" />
-            <p>No affirmations yet. Create your first one above! ✨</p>
           </div>
-        ) : (
-          affirmations.map(aff => (
-            <div key={aff.id} className="bg-white rounded-xl p-6 shadow-md border border-rose-100">
-              {editingAffirmation === aff.id ? (
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    defaultValue={aff.text}
-                    onBlur={(e) => updateAffirmation(aff.id, e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && updateAffirmation(aff.id, e.target.value)}
-                    className="flex-1 p-2 border border-rose-200 rounded focus:outline-none focus:ring-2 focus:ring-rose-300"
-                    autoFocus
-                  />
-                </div>
-              ) : (
-                <div className="flex justify-between items-start">
-                  <p className="text-gray-800 flex-1">{aff.text}</p>
-                  <div className="flex space-x-2 ml-4">
-                    <button
-                      onClick={() => setEditingAffirmation(aff.id)}
-                      className="text-amber-600 hover:text-amber-800"
-                    >
-                      <Edit3 size={18} />
-                    </button>
-                    <button
-                      onClick={() => deleteAffirmation(aff.id)}
-                      className="text-rose-600 hover:text-rose-800"
-                    >
-                      <Trash2 size={18} />
-                    </button>
+        </div>
+      )}
+
+      {showTimerAlert && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" onClick={() => setShowTimerAlert(false)}>
+          <div className="bg-white rounded-3xl p-8 max-w-md shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="text-center space-y-4">
+              <Clock size={64} className="mx-auto text-rose-500" />
+              <h3 className="text-2xl font-light text-rose-900">Timer Alert</h3>
+              <p className="text-gray-700 text-lg">{timerMessage}</p>
+              <button onClick={() => setShowTimerAlert(false)} className="bg-rose-500 text-white px-8 py-3 rounded-xl hover:bg-rose-600 transition">Got it!</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <main className="min-h-screen">
+        {currentPage === 'home' && (
+          <div className="max-w-2xl mx-auto p-6 space-y-8 pb-24">
+            <div className="text-center space-y-4">
+              <h2 className="text-3xl font-light text-rose-900">Welcome beautiful soul</h2>
+              <p className="text-lg text-rose-700">to your personal Manifestation App 🌸</p>
+            </div>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
+              <p className="text-lg text-gray-700 leading-relaxed italic">{quotes[dailyQuoteIndex].text}</p>
+              <p className="text-right text-rose-600 mt-4 italic">— {quotes[dailyQuoteIndex].author}</p>
+            </div>
+            {affirmationOfDay && (
+              <div className="bg-gradient-to-br from-amber-50 to-rose-50 rounded-2xl p-6 shadow-md border border-amber-100">
+                <p className="text-sm text-amber-700 mb-2">✨ Your Affirmation of the Day</p>
+                <p className="text-lg text-gray-800">{affirmationOfDay.text}</p>
+              </div>
+            )}
+            <div className="grid grid-cols-2 gap-4">
+              <button onClick={() => setCurrentPage('methods')} className="bg-rose-100 hover:bg-rose-200 p-6 rounded-2xl transition shadow-md flex flex-col items-center space-y-2 active:scale-95"><BookOpen size={32} className="text-gray-700" /><span className="font-light text-gray-900">Methods</span></button>
+              <button onClick={() => setCurrentPage('affirmations')} className="bg-amber-100 hover:bg-amber-200 p-6 rounded-2xl transition shadow-md flex flex-col items-center space-y-2 active:scale-95"><Edit3 size={32} className="text-gray-700" /><span className="font-light text-gray-900">Affirmations</span></button>
+              <button onClick={() => setCurrentPage('journal')} className="bg-rose-100 hover:bg-rose-200 p-6 rounded-2xl transition shadow-md flex flex-col items-center space-y-2 active:scale-95"><Edit3 size={32} className="text-gray-700" /><span className="font-light text-gray-900">Journal</span></button>
+              <button onClick={() => setCurrentPage('counter')} className="bg-amber-100 hover:bg-amber-200 p-6 rounded-2xl transition shadow-md flex flex-col items-center space-y-2 active:scale-95"><Hash size={32} className="text-gray-700" /><span className="font-light text-gray-900">Counter</span></button>
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'methods' && !selectedMethod && (
+          <div className="max-w-4xl mx-auto p-6 pb-24">
+            <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Manifestation Methods</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {methods.map(method => (
+                <div key={method.id} onClick={() => setSelectedMethod(method)} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition cursor-pointer border border-rose-100 active:scale-95">
+                  <div className="flex items-center space-x-3 mb-3">
+                    <span className="text-4xl">{method.emoji}</span>
+                    <h3 className="text-xl font-light text-rose-900">{method.title}</h3>
+                  </div>
+                  <p className="text-gray-600 text-sm">{method.subtitle}</p>
+                  <div className="mt-4 flex items-center text-rose-600 text-sm">
+                    <span>Learn more</span>
+                    <ChevronRight size={16} className="ml-1" />
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'methods' && selectedMethod && (
+          <div className="max-w-3xl mx-auto p-6 pb-24">
+            <button onClick={() => setSelectedMethod(null)} className="mb-6 text-rose-600 hover:text-rose-800">← Back to Methods</button>
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-rose-100">
+              <div className="flex items-center space-x-4 mb-6">
+                <span className="text-5xl">{selectedMethod.emoji}</span>
+                <h2 className="text-3xl font-light text-rose-900">{selectedMethod.title}</h2>
+              </div>
+              <p className="text-gray-700 text-lg mb-4 font-light italic">{selectedMethod.subtitle}</p>
+              {selectedMethod.description && <p className="text-gray-600 mb-6 leading-relaxed">{selectedMethod.description}</p>}
+              <div className="space-y-6">
+                <h3 className="text-xl font-light text-rose-800 mb-4">Steps:</h3>
+                {selectedMethod.steps.map((step, index) => (
+                  <div key={index} className="flex space-x-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center text-rose-900 font-light text-sm">{index + 1}</div>
+                    <p className="text-gray-700 pt-1 leading-relaxed">{step}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {currentPage === 'affirmations' && (
+          <div className="max-w-3xl mx-auto p-6 pb-24">
+            <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Your Affirmations</h2>
+            <div className="bg-white rounded-2xl p-6 shadow-lg mb-6 border border-rose-100">
+              <div className="flex space-x-2">
+                <input type="text" value={newAffirmation} onChange={(e) => setNewAffirmation(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && addAffirmation()} placeholder="Write your affirmation..." className="flex-1 p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300" />
+                <button onClick={addAffirmation} className="bg-rose-500 text-white p-3 rounded-lg hover:bg-rose-600 transition active:scale-95"><Plus size={24} /></button>
+              </div>
+            </div>
+            <div className="space-y-4">
+              {affirmations.length === 0 ? (
+                <div className="text-center py-12 text-gray-400">
+                  <Edit3 size={48} className="mx-auto mb-4 opacity-50" />
+                  <p>No affirmations yet. Create your first one above! ✨</p>
+                </div>
+              ) : (
+                affirmations.map(aff => (
+                  <div key={aff.id} className="bg-white rounded-xl p-6 shadow-md border border-rose-100">
+                    {editingAffirmation === aff.id ? (
+                      <input type="text" defaultValue={aff.text} onBlur={(e) => updateAffirmation(aff.id, e.target.value)} onKeyPress={(e) => e.key === 'Enter' && updateAffirmation(aff.id, e.target.value)} className="flex-1 p-2 border border-rose-200 rounded focus:outline-none focus:ring-2 focus:ring-rose-300 w-full" autoFocus />
+                    ) : (
+                      <div className="flex justify-between items-start">
+                        <p className="text-gray-800 flex-1">{aff.text}</p>
+                        <div className="flex space-x-2 ml-4">
+                          <button onClick={() => setEditingAffirmation(aff.id)} className="text-amber-600 hover:text-amber-800"><Edit3 size={18} /></button>
+                          <button onClick={() => deleteAffirmation(aff.id)} className="text-rose-600 hover:text-rose-800"><Trash2 size={18} /></button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))
               )}
             </div>
-          ))
+          </div>
         )}
-      </div>
-    </div>
-  );
 
-  const JournalPage =
+        {currentPage === 'journal' && (
+          <div className="max-w-3xl mx-auto p-6 pb-24">
+            <h2 className="text-3xl font-light text-rose-900 mb-8 text-center">Your Journal</h2>
+            <div className="bg-white rounded-2xl p-6 shadow-lg mb-6 border border-rose-100">
+              <input type="text" value={newJournal.title} onChange={(e) => setNewJournal({ ...newJournal, title: e.target.value })} placeholder="Entry title..." className="w-full p-3 mb-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300" />
+              <textarea value={newJournal.text} onChange={(e) => setNewJournal({ ...newJournal, text: e.target.value })} placeholder="Write your thoughts..." rows="6" className="w-full p-3 border border-rose-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300 resize-none" />
+              <button onClick={addJournalEntry} className="mt-3 bg-rose-500 text-white px-6 py-3 rounded-lg hover:bg-rose-600 transition flex items-center space-x-2"><Save size={20} /><span>Save Entry</span></button>
+            </div>
+            <div className="space-y-4">
+              {journalEntries.length === 0
